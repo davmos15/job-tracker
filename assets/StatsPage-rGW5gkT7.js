@@ -1,4 +1,4 @@
-import{d as Jv,c as Bo,j as I,g as mt,r as g,e as Uo,L as Qv}from"./index-QzyIvUtx.js";import{g as rd,C as em,u as tm}from"./useApplications-BNQgu71X.js";var nd=Jv();/**
+import{d as Jv,c as Bo,j as I,g as mt,r as g,e as Uo,L as Qv}from"./index-dnX3thmI.js";import{g as rd,C as em,u as tm}from"./useApplications-B5qob6lq.js";var nd=Jv();/**
  * @license lucide-react v0.525.0 - ISC
  *
  * This source code is licensed under the ISC license.
