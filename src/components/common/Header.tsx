@@ -21,6 +21,16 @@ const Header: React.FC = () => {
     }
   };
 
+  const handleMobileMenuToggle = () => {
+    console.log('Mobile menu toggle clicked, current state:', isMenuOpen);
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleMobileNavClick = (item: typeof navigation[0]) => {
+    console.log('Mobile nav clicked:', item.name, 'to:', item.href);
+    setIsMenuOpen(false);
+  };
+
   const navigation = [
     { name: 'Applications', href: ROUTES.APPLICATIONS },
     { name: 'Analytics', href: ROUTES.STATS },
@@ -95,7 +105,7 @@ const Header: React.FC = () => {
 
                 {/* Profile Dropdown */}
                 {isProfileMenuOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-popover rounded-lg shadow-lg border border-border z-50 overflow-hidden">
+                  <div className="absolute right-0 mt-2 w-48 bg-popover rounded-lg shadow-lg border border-border z-[60] overflow-hidden">
                     <div className="px-4 py-3 border-b border-border bg-muted/50">
                       <p className="text-sm font-medium text-foreground">
                         {appUser?.displayName || 'User'}
@@ -130,8 +140,10 @@ const Header: React.FC = () => {
 
             {/* Mobile menu button */}
             <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+              onClick={handleMobileMenuToggle}
+              className="md:hidden p-3 rounded-lg text-muted-foreground hover:text-foreground hover:bg-accent transition-colors touch-none"
+              aria-label="Toggle mobile menu"
+              aria-expanded={isMenuOpen}
             >
               {isMenuOpen ? (
                 <X className="h-5 w-5" />
@@ -144,7 +156,7 @@ const Header: React.FC = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 border-t border-border">
+          <div className="md:hidden py-4 border-t border-border relative z-50">
             <div className="space-y-1">
               {navigation.map((item) => {
                 const isActive = location.pathname === item.href;
@@ -152,12 +164,12 @@ const Header: React.FC = () => {
                   <Link
                     key={item.name}
                     to={item.href}
-                    className={`block px-3 py-3 text-base font-medium rounded-lg transition-colors ${
+                    className={`block px-4 py-4 text-base font-medium rounded-lg transition-colors min-h-[48px] flex items-center ${
                       isActive
                         ? 'bg-primary text-primary-foreground'
                         : 'text-muted-foreground hover:text-foreground hover:bg-accent'
                     }`}
-                    onClick={() => setIsMenuOpen(false)}
+                    onClick={() => handleMobileNavClick(item)}
                   >
                     {item.name}
                   </Link>

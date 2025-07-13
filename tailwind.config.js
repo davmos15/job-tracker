@@ -32,6 +32,21 @@ module.exports = {
     'hover:text-gray-600', 'hover:text-gray-700', 'hover:text-gray-800', 'hover:text-red-600', 'hover:text-blue-800',
     // Loading spinner and animation classes
     'animate-spin', 'animate-pulse',
+    // Theme system classes
+    'bg-card', 'text-card-foreground', 'bg-background', 'text-foreground',
+    'bg-primary', 'text-primary-foreground', 'bg-secondary', 'text-secondary-foreground',
+    'bg-muted', 'text-muted-foreground', 'bg-accent', 'text-accent-foreground',
+    'bg-destructive', 'text-destructive-foreground', 'bg-popover', 'text-popover-foreground',
+    'border-border', 'border-input', 'ring-ring', 'ring-primary',
+    // Dark mode status badge classes
+    'dark:bg-blue-900/30', 'dark:text-blue-300', 'dark:bg-green-900/30', 'dark:text-green-300',
+    'dark:bg-red-900/30', 'dark:text-red-300', 'dark:bg-purple-900/30', 'dark:text-purple-300',
+    'dark:bg-gray-700/30', 'dark:text-gray-300', 'dark:bg-orange-900/30', 'dark:text-orange-300',
+    // Additional interactive states
+    'hover:bg-accent', 'hover:text-foreground', 'hover:bg-destructive/10', 'hover:text-destructive',
+    'z-50', 'z-[60]', 'backdrop-blur', 'supports-[backdrop-filter]:bg-card/60',
+    // Mobile navigation classes
+    'min-h-[48px]', 'touch-none', 'aria-expanded', 'relative',
   ],
   theme: {
     extend: {
