@@ -104,23 +104,23 @@ const TrackingPage: React.FC = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Job Tracking</h1>
-        <p className="mt-2 text-gray-600">
+        <h1 className="text-3xl font-bold text-foreground">Job Tracking</h1>
+        <p className="mt-2 text-muted-foreground">
           Track interview progress and add stage-specific notes
         </p>
       </div>
 
       {/* Job Selection */}
-      <div className="bg-white rounded-lg shadow p-6 mb-6">
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">Select Application</h2>
+      <div className="card p-6 mb-6">
+        <h2 className="text-lg font-semibold text-foreground mb-4">Select Application</h2>
         
         {activeApplications.length === 0 ? (
-          <p className="text-gray-500">No active applications to track. Add some applications first!</p>
+          <p className="text-muted-foreground">No active applications to track. Add some applications first!</p>
         ) : (
           <select
             value={selectedApplication?.id || ''}
             onChange={(e) => handleApplicationSelect(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="w-full px-3 py-2 border border-input bg-background text-foreground rounded-md focus:outline-none focus:ring-2 focus:ring-ring/20 focus:border-ring"
           >
             <option value="">Select an application to track...</option>
             {activeApplications.map(app => (
@@ -135,11 +135,11 @@ const TrackingPage: React.FC = () => {
       {selectedApplication && (
         <>
           {/* Selected Application Info */}
-          <div className="bg-white rounded-lg shadow p-6 mb-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">
+          <div className="card p-6 mb-6">
+            <h2 className="text-lg font-semibold text-foreground mb-4">
               Tracking: {selectedApplication.title} at {selectedApplication.company}
             </h2>
-            <div className="flex items-center space-x-4 text-sm text-gray-500">
+            <div className="flex items-center space-x-4 text-sm text-muted-foreground">
               <div className="flex items-center">
                 <Calendar className="w-4 h-4 mr-1" />
                 <span>Applied: {formatDate(selectedApplication.dateApplied)}</span>
@@ -152,15 +152,15 @@ const TrackingPage: React.FC = () => {
           </div>
 
           {/* Stage Notes Form */}
-          <div className="bg-white rounded-lg shadow p-6 mb-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">
+          <div className="card p-6 mb-6">
+            <h3 className="text-lg font-semibold text-foreground mb-4">
               {editingNote ? 'Edit Stage Note' : 'Add New Stage Note'}
             </h3>
             
             <div className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="stage-title" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor="stage-title" className="block text-sm font-medium text-foreground mb-1">
                     Stage/Interview Type
                   </label>
                   <input
@@ -169,12 +169,12 @@ const TrackingPage: React.FC = () => {
                     value={stageTitle}
                     onChange={(e) => setStageTitle(e.target.value)}
                     placeholder="e.g., Phone Call, Technical Interview, HR Interview"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full px-3 py-2 border border-input bg-background text-foreground rounded-md focus:outline-none focus:ring-2 focus:ring-ring/20 focus:border-ring"
                   />
                 </div>
                 
                 <div>
-                  <label htmlFor="stage-date" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor="stage-date" className="block text-sm font-medium text-foreground mb-1">
                     Date
                   </label>
                   <input
@@ -182,13 +182,13 @@ const TrackingPage: React.FC = () => {
                     id="stage-date"
                     value={stageDate}
                     onChange={(e) => setStageDate(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full px-3 py-2 border border-input bg-background text-foreground rounded-md focus:outline-none focus:ring-2 focus:ring-ring/20 focus:border-ring"
                   />
                 </div>
               </div>
               
               <div>
-                <label htmlFor="stage-notes" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="stage-notes" className="block text-sm font-medium text-foreground mb-1">
                   Notes & Details
                 </label>
                 <textarea
@@ -197,7 +197,7 @@ const TrackingPage: React.FC = () => {
                   onChange={(e) => setStageNotes(e.target.value)}
                   rows={4}
                   placeholder="Add detailed notes about this stage: questions asked, your responses, feedback received, next steps, etc."
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full px-3 py-2 border border-input bg-background text-foreground rounded-md focus:outline-none focus:ring-2 focus:ring-ring/20 focus:border-ring"
                 />
               </div>
               
@@ -205,7 +205,7 @@ const TrackingPage: React.FC = () => {
                 <button
                   onClick={handleSaveStageNote}
                   disabled={!stageTitle.trim() || !stageNotes.trim() || saving}
-                  className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex items-center px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {saving ? (
                     <LoadingSpinner size="sm" className="mr-2" />
@@ -218,7 +218,7 @@ const TrackingPage: React.FC = () => {
                 {editingNote && (
                   <button
                     onClick={resetForm}
-                    className="px-4 py-2 text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50"
+                    className="px-4 py-2 text-muted-foreground border border-input rounded-md hover:bg-accent"
                   >
                     Cancel Edit
                   </button>
@@ -229,8 +229,8 @@ const TrackingPage: React.FC = () => {
 
           {/* Existing Stage Notes */}
           {selectedApplication.interviewNotes && selectedApplication.interviewNotes.length > 0 && (
-            <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">
+            <div className="card p-6">
+              <h3 className="text-lg font-semibold text-foreground mb-4">
                 Stage History ({selectedApplication.interviewNotes.length})
               </h3>
               
@@ -238,30 +238,30 @@ const TrackingPage: React.FC = () => {
                 {selectedApplication.interviewNotes
                   .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
                   .map((note) => (
-                    <div key={note.id} className="border border-gray-200 rounded-lg p-4">
+                    <div key={note.id} className="border border-border rounded-lg p-4 bg-card">
                       <div className="flex items-start justify-between mb-2">
                         <div>
-                          <h4 className="font-medium text-gray-900 capitalize">{note.type}</h4>
-                          <p className="text-sm text-gray-500">{formatDate(note.date)}</p>
+                          <h4 className="font-medium text-foreground capitalize">{note.type}</h4>
+                          <p className="text-sm text-muted-foreground">{formatDate(note.date)}</p>
                         </div>
                         <div className="flex items-center space-x-2">
                           <button
                             onClick={() => handleEditNote(note)}
-                            className="text-blue-600 hover:text-blue-800"
+                            className="text-primary hover:text-primary/80"
                             title="Edit note"
                           >
                             <Plus className="w-4 h-4" />
                           </button>
                           <button
                             onClick={() => handleDeleteNote(note.id)}
-                            className="text-red-600 hover:text-red-800"
+                            className="text-destructive hover:text-destructive/80"
                             title="Delete note"
                           >
                             <Trash2 className="w-4 h-4" />
                           </button>
                         </div>
                       </div>
-                      <p className="text-gray-700 whitespace-pre-wrap">{note.notes}</p>
+                      <p className="text-foreground whitespace-pre-wrap">{note.notes}</p>
                     </div>
                   ))}
               </div>

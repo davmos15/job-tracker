@@ -63,13 +63,13 @@ const StatsCards: React.FC<StatsCardsProps> = ({ applications }) => {
                 <Icon className={`w-6 h-6 ${colors.text}`} />
               </div>
               <div className="ml-4 flex-1 min-w-0">
-                <p className="text-sm font-medium text-gray-500 truncate">
+                <p className="text-sm font-medium text-muted-foreground truncate">
                   {card.title}
                 </p>
-                <p className="text-2xl font-semibold text-gray-900">
+                <p className="text-2xl font-semibold text-foreground">
                   {card.value}
                 </p>
-                <p className="text-xs text-gray-400">
+                <p className="text-xs text-muted-foreground">
                   {card.description}
                 </p>
               </div>
