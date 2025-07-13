@@ -129,38 +129,38 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
 
       {/* Filter Panel */}
       {isOpen && (
-        <div className="absolute top-full left-0 mt-2 bg-white rounded-lg shadow-lg border border-gray-200 p-4 w-80 z-50">
+        <div className="fixed md:absolute inset-x-4 md:inset-x-auto md:left-0 md:right-auto bottom-4 md:bottom-auto md:top-full md:mt-2 bg-card rounded-lg shadow-lg border border-border p-4 md:p-6 w-auto md:w-96 max-w-[calc(100vw-2rem)] md:max-w-md z-50 max-h-[80vh] md:max-h-[600px] overflow-hidden flex flex-col">
           {/* Header */}
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-medium text-gray-900">Filters</h3>
-            <div className="flex items-center space-x-2">
+          <div className="flex items-center justify-between mb-4 flex-shrink-0">
+            <h3 className="text-lg font-semibold text-foreground">Filters</h3>
+            <div className="flex items-center space-x-3">
               {hasActiveFilters && (
                 <button
                   onClick={clearAllFilters}
-                  className="text-sm text-gray-500 hover:text-gray-700"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                 >
                   Clear all
                 </button>
               )}
               <button
                 onClick={onToggle}
-                className="text-gray-400 hover:text-gray-600"
+                className="p-1 rounded-lg text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-4 overflow-y-auto flex-1 pr-2">
             {/* Search */}
             <div>
-              <label className="label">
-                <Search className="w-4 h-4 inline mr-2" />
+              <label className="text-sm font-medium text-foreground mb-2 flex items-center">
+                <Search className="w-4 h-4 mr-2" />
                 Search
               </label>
               <input
                 type="text"
-                className="input"
+                className="w-full px-3 py-2 text-sm border border-input bg-background text-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-ring/20 focus:border-ring transition-colors"
                 placeholder="Search jobs or companies..."
                 value={localFilters.searchTerm || ''}
                 onChange={handleSearchChange}
@@ -169,17 +169,17 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
 
             {/* Status Filter */}
             <div>
-              <label className="label">Status</label>
-              <div className="space-y-2 max-h-40 overflow-y-auto">
+              <label className="text-sm font-medium text-foreground mb-2 block">Status</label>
+              <div className="grid grid-cols-1 gap-2 max-h-48 overflow-y-auto pr-2">
                 {APPLICATION_STATUSES.map((status) => (
-                  <label key={status} className="flex items-center">
+                  <label key={status} className="flex items-center p-2 rounded-lg hover:bg-accent transition-colors cursor-pointer">
                     <input
                       type="checkbox"
-                      className="rounded border-gray-300 text-blue-600 mr-2"
+                      className="rounded border-input bg-background text-primary focus:ring-primary/20 mr-3"
                       checked={localFilters.status?.includes(status) || false}
                       onChange={(e) => handleStatusChange(status, e.target.checked)}
                     />
-                    <span className="text-sm text-gray-700">{status}</span>
+                    <span className="text-sm text-foreground">{status}</span>
                   </label>
                 ))}
               </div>
@@ -188,20 +188,20 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
             {/* Company Filter */}
             {companies.length > 0 && (
               <div>
-                <label className="label">
-                  <Building className="w-4 h-4 inline mr-2" />
+                <label className="text-sm font-medium text-foreground mb-2 flex items-center">
+                  <Building className="w-4 h-4 mr-2" />
                   Companies
                 </label>
-                <div className="space-y-2 max-h-32 overflow-y-auto">
+                <div className="grid grid-cols-1 gap-2 max-h-32 overflow-y-auto pr-2">
                   {companies.map((company) => (
-                    <label key={company} className="flex items-center">
+                    <label key={company} className="flex items-center p-2 rounded-lg hover:bg-accent transition-colors cursor-pointer">
                       <input
                         type="checkbox"
-                        className="rounded border-gray-300 text-blue-600 mr-2"
+                        className="rounded border-input bg-background text-primary focus:ring-primary/20 mr-3"
                         checked={localFilters.companies?.includes(company) || false}
                         onChange={(e) => handleCompanyChange(company, e.target.checked)}
                       />
-                      <span className="text-sm text-gray-700">{company}</span>
+                      <span className="text-sm text-foreground truncate">{company}</span>
                     </label>
                   ))}
                 </div>
@@ -210,44 +210,45 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
 
             {/* Date Range Filter */}
             <div>
-              <label className="label">
-                <Calendar className="w-4 h-4 inline mr-2" />
+              <label className="text-sm font-medium text-foreground mb-2 flex items-center">
+                <Calendar className="w-4 h-4 mr-2" />
                 Date Range
               </label>
-              <div className="space-y-2">
+              <div className="space-y-3">
                 <div className="grid grid-cols-2 gap-2">
                   {[
-                    { key: 'week', label: 'Last 7 days' },
-                    { key: 'month', label: 'Last 30 days' },
-                    { key: 'quarter', label: 'Last 90 days' },
-                    { key: 'year', label: 'Last year' }
+                    { key: 'week', label: '7 days' },
+                    { key: 'month', label: '30 days' },
+                    { key: 'quarter', label: '90 days' },
+                    { key: 'year', label: '1 year' }
                   ].map(({ key, label }) => (
                     <button
                       key={key}
                       onClick={() => handleDateRangeChange(key as any)}
-                      className="text-sm py-1 px-2 rounded border border-gray-300 hover:bg-gray-50 text-left"
+                      className="text-xs py-2 px-3 rounded-lg border border-input bg-background text-foreground hover:bg-accent transition-colors"
                     >
                       {label}
                     </button>
                   ))}
                 </div>
                 
-                <div className="border-t pt-2">
+                <div className="border-t border-border pt-3">
+                  <p className="text-xs text-muted-foreground mb-2">Custom Range</p>
                   <div className="grid grid-cols-2 gap-2">
                     <div>
-                      <label className="text-xs text-gray-500">From</label>
+                      <label className="text-xs text-muted-foreground block mb-1">From</label>
                       <input
                         type="date"
-                        className="input text-xs"
+                        className="w-full px-2 py-1 text-xs border border-input bg-background text-foreground rounded focus:outline-none focus:ring-1 focus:ring-ring/20"
                         value={localFilters.dateRange?.start || ''}
                         onChange={(e) => handleCustomDateChange('start', e.target.value)}
                       />
                     </div>
                     <div>
-                      <label className="text-xs text-gray-500">To</label>
+                      <label className="text-xs text-muted-foreground block mb-1">To</label>
                       <input
                         type="date"
-                        className="input text-xs"
+                        className="w-full px-2 py-1 text-xs border border-input bg-background text-foreground rounded focus:outline-none focus:ring-1 focus:ring-ring/20"
                         value={localFilters.dateRange?.end || ''}
                         onChange={(e) => handleCustomDateChange('end', e.target.value)}
                       />
