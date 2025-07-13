@@ -10,6 +10,16 @@ interface StatsCardsProps {
 const StatsCards: React.FC<StatsCardsProps> = ({ applications }) => {
   const stats = getApplicationStats(applications);
 
+  const getColorClasses = (color: string) => {
+    const colorClassMap: Record<string, { bg: string; text: string }> = {
+      'blue': { bg: 'bg-blue-100', text: 'text-blue-600' },
+      'green': { bg: 'bg-green-100', text: 'text-green-600' },
+      'purple': { bg: 'bg-purple-100', text: 'text-purple-600' },
+      'orange': { bg: 'bg-orange-100', text: 'text-orange-600' }
+    };
+    return colorClassMap[color] || { bg: 'bg-gray-100', text: 'text-gray-600' };
+  };
+
   const cards = [
     {
       title: 'Total Applications',
@@ -45,11 +55,12 @@ const StatsCards: React.FC<StatsCardsProps> = ({ applications }) => {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
       {cards.map((card, index) => {
         const Icon = card.icon;
+        const colors = getColorClasses(card.color);
         return (
           <div key={index} className="card p-6">
             <div className="flex items-center">
-              <div className={`flex-shrink-0 p-3 bg-${card.color}-100 rounded-lg`}>
-                <Icon className={`w-6 h-6 text-${card.color}-600`} />
+              <div className={`flex-shrink-0 p-3 ${colors.bg} rounded-lg`}>
+                <Icon className={`w-6 h-6 ${colors.text}`} />
               </div>
               <div className="ml-4 flex-1 min-w-0">
                 <p className="text-sm font-medium text-gray-500 truncate">

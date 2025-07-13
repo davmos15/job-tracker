@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Calendar, ExternalLink, DollarSign, ChevronDown, ChevronUp, Edit, Trash2 } from 'lucide-react';
 import type { Application } from '../../types/application';
 import { formatDate, formatRelativeTime } from '../../utils/dateUtils';
-import { formatCurrency, getStatusColor } from '../../utils/helpers';
+import { formatCurrency } from '../../utils/helpers';
 
 interface ApplicationCardProps {
   application: Application;
@@ -41,7 +41,21 @@ const ApplicationCard: React.FC<ApplicationCardProps> = ({
     }
   };
 
-  const statusColor = getStatusColor(application.status);
+  const getStatusBadgeClasses = (status: string) => {
+    const statusClassMap: Record<string, string> = {
+      'Applied': 'bg-blue-100 text-blue-800',
+      'Phone Call': 'bg-purple-100 text-purple-800',
+      '1st Interview': 'bg-purple-100 text-purple-800',
+      '2nd Interview': 'bg-purple-100 text-purple-800',
+      'Offer': 'bg-green-100 text-green-800',
+      'Rejected after Applying': 'bg-red-100 text-red-800',
+      'Rejected after Phone Call': 'bg-red-100 text-red-800',
+      'Rejected after 1st Interview': 'bg-red-100 text-red-800',
+      'Rejected after 2nd Interview': 'bg-red-100 text-red-800',
+      'Ghosted': 'bg-gray-100 text-gray-800'
+    };
+    return statusClassMap[status] || 'bg-gray-100 text-gray-800';
+  };
   
   return (
     <div 
@@ -61,7 +75,7 @@ const ApplicationCard: React.FC<ApplicationCardProps> = ({
         
         <div className="flex items-center space-x-2 ml-4">
           <span 
-            className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-${statusColor}-100 text-${statusColor}-800`}
+            className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusBadgeClasses(application.status)}`}
           >
             {application.status}
           </span>
