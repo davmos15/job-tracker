@@ -1,0 +1,144 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: 59 130 246;
+  --color-secondary: 99 102 241;
+  --color-success: 34 197 94;
+  --color-warning: 251 146 60;
+  --color-error: 239 68 68;
+  --radius: 0.5rem;
+}
+
+body {
+  background-color: #f9fafb;
+  color: #111827;
+  font-feature-settings: 'kern' 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Mobile touch targets */
+button, 
+a, 
+input, 
+select, 
+textarea {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Focus states */
+*:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgb(59 130 246), 0 0 0 4px rgb(59 130 246 / 0.2);
+}
+
+/* Component styles using standard CSS */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+}
+
+.btn:disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.btn-primary {
+  background-color: rgb(37 99 235);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: rgb(29 78 216);
+}
+
+.btn-secondary {
+  background-color: rgb(229 231 235);
+  color: rgb(17 24 39);
+}
+
+.btn-secondary:hover {
+  background-color: rgb(209 213 219);
+}
+
+.card {
+  background-color: white;
+  border-radius: 0.5rem;
+  border: 1px solid rgb(229 231 235);
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+.input {
+  display: block;
+  width: 100%;
+  border-radius: 0.375rem;
+  border: 1px solid rgb(209 213 219);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+}
+
+.input:focus {
+  outline: none;
+  border-color: rgb(59 130 246);
+  box-shadow: 0 0 0 1px rgb(59 130 246);
+}
+
+.label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgb(55 65 81);
+  margin-bottom: 0.25rem;
+}
+
+.form-error {
+  color: rgb(220 38 38);
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+/* Utility classes */
+.text-fluid-xs {
+  font-size: clamp(0.75rem, 2vw, 0.875rem);
+}
+
+.text-fluid-sm {
+  font-size: clamp(0.875rem, 2.5vw, 1rem);
+}
+
+.text-fluid-base {
+  font-size: clamp(1rem, 3vw, 1.125rem);
+}
+
+.loading-spinner {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgb(37 99 235);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
