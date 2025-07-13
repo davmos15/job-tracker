@@ -38,11 +38,16 @@ const ApplicationForm: React.FC<ApplicationFormProps> = ({
   useEffect(() => {
     if (isOpen) {
       if (application) {
+        // Ensure dateApplied is in YYYY-MM-DD format for the date input
+        const dateApplied = application.dateApplied.includes('T') 
+          ? application.dateApplied.split('T')[0] 
+          : application.dateApplied;
+        
         reset({
           title: application.title,
           company: application.company,
           jobLink: application.jobLink || '',
-          dateApplied: application.dateApplied,
+          dateApplied: dateApplied,
           status: application.status,
           salary: application.salary || '',
           salaryType: application.salaryType,

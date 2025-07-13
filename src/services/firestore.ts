@@ -86,9 +86,12 @@ export const getApplication = async (applicationId: string): Promise<Application
   const docSnap = await getDoc(applicationRef);
   
   if (docSnap.exists()) {
+    const data = docSnap.data();
     return {
       id: docSnap.id,
-      ...docSnap.data()
+      ...data,
+      createdAt: data.createdAt?.toDate ? data.createdAt.toDate() : new Date(data.createdAt),
+      updatedAt: data.updatedAt?.toDate ? data.updatedAt.toDate() : new Date(data.updatedAt)
     } as Application;
   }
   
@@ -107,10 +110,15 @@ export const getUserApplications = async (
   );
   
   const querySnapshot = await getDocs(q);
-  return querySnapshot.docs.map(doc => ({
-    id: doc.id,
-    ...doc.data()
-  } as Application));
+  return querySnapshot.docs.map(doc => {
+    const data = doc.data();
+    return {
+      id: doc.id,
+      ...data,
+      createdAt: data.createdAt?.toDate ? data.createdAt.toDate() : new Date(data.createdAt),
+      updatedAt: data.updatedAt?.toDate ? data.updatedAt.toDate() : new Date(data.updatedAt)
+    } as Application;
+  });
 };
 
 // Real-time subscription
@@ -129,10 +137,15 @@ export const subscribeToUserApplications = (
   return onSnapshot(
     q,
     (snapshot: QuerySnapshot<DocumentData>) => {
-      const applications = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      } as Application));
+      const applications = snapshot.docs.map(doc => {
+        const data = doc.data();
+        return {
+          id: doc.id,
+          ...data,
+          createdAt: data.createdAt?.toDate ? data.createdAt.toDate() : new Date(data.createdAt),
+          updatedAt: data.updatedAt?.toDate ? data.updatedAt.toDate() : new Date(data.updatedAt)
+        } as Application;
+      });
       onUpdate(applications);
     },
     onError
