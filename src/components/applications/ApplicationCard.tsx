@@ -43,32 +43,34 @@ const ApplicationCard: React.FC<ApplicationCardProps> = ({
 
   const getStatusBadgeClasses = (status: string) => {
     const statusClassMap: Record<string, string> = {
-      'Applied': 'bg-blue-100 text-blue-800',
-      'Phone Call': 'bg-purple-100 text-purple-800',
-      '1st Interview': 'bg-purple-100 text-purple-800',
-      '2nd Interview': 'bg-purple-100 text-purple-800',
-      'Offer': 'bg-green-100 text-green-800',
-      'Rejected after Applying': 'bg-red-100 text-red-800',
-      'Rejected after Phone Call': 'bg-red-100 text-red-800',
-      'Rejected after 1st Interview': 'bg-red-100 text-red-800',
-      'Rejected after 2nd Interview': 'bg-red-100 text-red-800',
-      'Ghosted': 'bg-gray-100 text-gray-800'
+      'Applied': 'bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300',
+      'Phone Call': 'bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300',
+      '1st Interview': 'bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300',
+      '2nd Interview': 'bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300',
+      'Offer': 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300',
+      'Rejected after Applying': 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300',
+      'Rejected after Phone Call': 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300',
+      'Rejected after 1st Interview': 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300',
+      'Rejected after 2nd Interview': 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300',
+      'Ghosted': 'bg-gray-100 dark:bg-gray-700/30 text-gray-800 dark:text-gray-300'
     };
-    return statusClassMap[status] || 'bg-gray-100 text-gray-800';
+    return statusClassMap[status] || 'bg-gray-100 dark:bg-gray-700/30 text-gray-800 dark:text-gray-300';
   };
   
   return (
     <div 
-      className={`application-card ${isExpanded ? 'application-card-expanded' : ''}`}
+      className={`card p-6 cursor-pointer transition-all duration-200 hover:shadow-lg ${
+        isExpanded ? 'ring-2 ring-primary/20' : ''
+      }`}
       onClick={handleCardClick}
     >
       {/* Header */}
-      <div className="flex items-start justify-between mb-3">
+      <div className="flex items-start justify-between mb-4">
         <div className="flex-1 min-w-0">
-          <h3 className="text-lg font-semibold text-gray-900 truncate">
+          <h3 className="text-lg font-semibold text-foreground truncate">
             {application.title}
           </h3>
-          <p className="text-gray-600 font-medium">
+          <p className="text-muted-foreground font-medium">
             {application.company}
           </p>
         </div>
@@ -82,7 +84,7 @@ const ApplicationCard: React.FC<ApplicationCardProps> = ({
           
           <button
             onClick={handleEdit}
-            className="action-button p-1 text-gray-400 hover:text-gray-600 rounded"
+            className="action-button p-2 text-muted-foreground hover:text-foreground hover:bg-accent rounded-lg transition-colors"
             title="Edit application"
           >
             <Edit className="w-4 h-4" />
@@ -90,7 +92,7 @@ const ApplicationCard: React.FC<ApplicationCardProps> = ({
           
           <button
             onClick={handleDelete}
-            className="action-button p-1 text-gray-400 hover:text-red-600 rounded"
+            className="action-button p-2 text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-lg transition-colors"
             title="Delete application"
           >
             <Trash2 className="w-4 h-4" />
@@ -99,7 +101,7 @@ const ApplicationCard: React.FC<ApplicationCardProps> = ({
       </div>
 
       {/* Quick Info */}
-      <div className="flex items-center space-x-4 text-sm text-gray-500 mb-3">
+      <div className="flex items-center space-x-4 text-sm text-muted-foreground mb-4">
         <div className="flex items-center">
           <Calendar className="w-4 h-4 mr-1" />
           <span>{formatDate(application.dateApplied)}</span>
