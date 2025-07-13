@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
+import { ThemeProvider } from './contexts/ThemeContext';
 import ErrorBoundary from './components/common/ErrorBoundary';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import LoginPage from './components/auth/LoginPage';
@@ -16,9 +17,10 @@ const SettingsPage = React.lazy(() => import('./pages/SettingsPage'));
 function App() {
   return (
     <ErrorBoundary>
-      <AuthProvider>
-        <Router basename="/job-tracker">
-          <div className="min-h-screen bg-gray-50">
+      <ThemeProvider>
+        <AuthProvider>
+          <Router basename="/job-tracker">
+            <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
             <Routes>
               {/* Public routes */}
               <Route path={ROUTES.LOGIN} element={<LoginPage />} />
@@ -86,9 +88,10 @@ function App() {
               {/* Catch all route */}
               <Route path="*" element={<Navigate to={ROUTES.APPLICATIONS} replace />} />
             </Routes>
-          </div>
-        </Router>
-      </AuthProvider>
+            </div>
+          </Router>
+        </AuthProvider>
+      </ThemeProvider>
     </ErrorBoundary>
   );
 }
