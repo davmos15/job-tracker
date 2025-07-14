@@ -110,10 +110,10 @@ const ApplicationList: React.FC<ApplicationListProps> = ({
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">
+          <h1 className="text-2xl font-bold text-foreground">
             Job Applications
           </h1>
-          <p className="text-gray-600">
+          <p className="text-muted-foreground">
             {applications.length} total • {filteredApplications.length} filtered
           </p>
         </div>
@@ -132,7 +132,7 @@ const ApplicationList: React.FC<ApplicationListProps> = ({
             </button>
 
             {isSortOpen && (
-              <div className="absolute top-full right-0 mt-2 bg-white rounded-lg shadow-lg border border-gray-200 py-2 w-48 z-50">
+              <div className="absolute top-full right-0 mt-2 bg-card rounded-lg shadow-lg border border-border py-2 w-48 z-50">
                 {[
                   { field: 'updatedAt', label: 'Last Updated' },
                   { field: 'dateApplied', label: 'Date Applied' },
@@ -143,8 +143,8 @@ const ApplicationList: React.FC<ApplicationListProps> = ({
                   <button
                     key={field}
                     onClick={() => handleSort(field as SortField)}
-                    className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-100 ${
-                      sortField === field ? 'bg-blue-50 text-blue-700' : 'text-gray-700'
+                    className={`w-full text-left px-4 py-2 text-sm hover:bg-accent ${
+                      sortField === field ? 'bg-accent text-primary' : 'text-foreground'
                     }`}
                   >
                     {label}
@@ -160,13 +160,13 @@ const ApplicationList: React.FC<ApplicationListProps> = ({
           </div>
 
           {/* View Mode Toggle */}
-          <div className="flex border border-gray-300 rounded">
+          <div className="flex border border-input rounded">
             <button
               onClick={() => setViewMode('grid')}
               className={`p-2 ${
                 viewMode === 'grid'
-                  ? 'bg-blue-500 text-white'
-                  : 'bg-white text-gray-600 hover:bg-gray-50'
+                  ? 'bg-primary text-primary-foreground'
+                  : 'bg-background text-muted-foreground hover:bg-accent'
               }`}
               title="Grid view"
             >
@@ -176,8 +176,8 @@ const ApplicationList: React.FC<ApplicationListProps> = ({
               onClick={() => setViewMode('list')}
               className={`p-2 ${
                 viewMode === 'list'
-                  ? 'bg-blue-500 text-white'
-                  : 'bg-white text-gray-600 hover:bg-gray-50'
+                  ? 'bg-primary text-primary-foreground'
+                  : 'bg-background text-muted-foreground hover:bg-accent'
               }`}
               title="List view"
             >
@@ -211,10 +211,10 @@ const ApplicationList: React.FC<ApplicationListProps> = ({
         <div className="text-center py-12">
           {applications.length === 0 ? (
             <div>
-              <p className="text-xl font-medium text-gray-900 mb-2">
+              <p className="text-xl font-medium text-foreground mb-2">
                 No applications yet
               </p>
-              <p className="text-gray-600 mb-6">
+              <p className="text-muted-foreground mb-6">
                 Start tracking your job applications by adding your first one.
               </p>
               <button
@@ -227,10 +227,10 @@ const ApplicationList: React.FC<ApplicationListProps> = ({
             </div>
           ) : (
             <div>
-              <p className="text-xl font-medium text-gray-900 mb-2">
+              <p className="text-xl font-medium text-foreground mb-2">
                 No applications match your filters
               </p>
-              <p className="text-gray-600 mb-4">
+              <p className="text-muted-foreground mb-4">
                 Try adjusting your search criteria or clearing the filters.
               </p>
               <button
@@ -263,9 +263,9 @@ const ApplicationList: React.FC<ApplicationListProps> = ({
 
       {/* Loading overlay */}
       {loading && applications.length > 0 && (
-        <div className="fixed top-4 right-4 bg-white rounded-lg shadow-lg p-3 flex items-center space-x-2">
+        <div className="fixed top-4 right-4 bg-card rounded-lg shadow-lg p-3 flex items-center space-x-2">
           <LoadingSpinner size="sm" />
-          <span className="text-sm text-gray-600">Syncing...</span>
+          <span className="text-sm text-muted-foreground">Syncing...</span>
         </div>
       )}
 

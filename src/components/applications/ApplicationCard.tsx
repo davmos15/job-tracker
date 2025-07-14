@@ -131,12 +131,12 @@ const ApplicationCard: React.FC<ApplicationCardProps> = ({
 
       {/* Expand/Collapse Button */}
       <div className="flex items-center justify-between">
-        <span className="text-xs text-gray-400">
+        <span className="text-xs text-muted-foreground">
           {formatRelativeTime(application.updatedAt)}
         </span>
         
         <button
-          className="flex items-center text-xs text-gray-500 hover:text-gray-700"
+          className="flex items-center text-xs text-muted-foreground hover:text-foreground"
           onClick={(e) => {
             e.stopPropagation();
             setIsExpanded(!isExpanded);
@@ -158,11 +158,11 @@ const ApplicationCard: React.FC<ApplicationCardProps> = ({
 
       {/* Expanded Content */}
       {isExpanded && (
-        <div className="mt-4 pt-4 border-t border-gray-200 space-y-3">
+        <div className="mt-4 pt-4 border-t border-border space-y-3">
           {application.notes && (
             <div>
-              <h4 className="text-sm font-medium text-gray-900 mb-1">Notes</h4>
-              <p className="text-sm text-gray-600 whitespace-pre-wrap">
+              <h4 className="text-sm font-medium text-foreground mb-1">Notes</h4>
+              <p className="text-sm text-muted-foreground whitespace-pre-wrap">
                 {application.notes}
               </p>
             </div>
@@ -170,8 +170,8 @@ const ApplicationCard: React.FC<ApplicationCardProps> = ({
           
           {application.benefits && (
             <div>
-              <h4 className="text-sm font-medium text-gray-900 mb-1">Benefits</h4>
-              <p className="text-sm text-gray-600 whitespace-pre-wrap">
+              <h4 className="text-sm font-medium text-foreground mb-1">Benefits</h4>
+              <p className="text-sm text-muted-foreground whitespace-pre-wrap">
                 {application.benefits}
               </p>
             </div>
@@ -179,8 +179,8 @@ const ApplicationCard: React.FC<ApplicationCardProps> = ({
           
           {application.selectionCriteria && (
             <div>
-              <h4 className="text-sm font-medium text-gray-900 mb-1">Selection Criteria</h4>
-              <p className="text-sm text-gray-600 whitespace-pre-wrap">
+              <h4 className="text-sm font-medium text-foreground mb-1">Selection Criteria</h4>
+              <p className="text-sm text-muted-foreground whitespace-pre-wrap">
                 {application.selectionCriteria}
               </p>
             </div>
@@ -188,24 +188,24 @@ const ApplicationCard: React.FC<ApplicationCardProps> = ({
           
           {application.interviewNotes && application.interviewNotes.length > 0 && (
             <div>
-              <h4 className="text-sm font-medium text-gray-900 mb-2">
+              <h4 className="text-sm font-medium text-foreground mb-2">
                 Interview Notes ({application.interviewNotes.length})
               </h4>
               <div className="space-y-2">
                 {application.interviewNotes.slice(0, 2).map((note) => (
-                  <div key={note.id} className="bg-gray-50 rounded p-2">
+                  <div key={note.id} className="bg-accent rounded p-2">
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-xs font-medium text-gray-700 capitalize">
+                      <span className="text-xs font-medium text-foreground capitalize">
                         {note.type} - {formatDate(note.date)}
                       </span>
                     </div>
-                    <p className="text-xs text-gray-600 line-clamp-2">
+                    <p className="text-xs text-muted-foreground line-clamp-2">
                       {note.notes}
                     </p>
                   </div>
                 ))}
                 {application.interviewNotes.length > 2 && (
-                  <p className="text-xs text-gray-500 text-center">
+                  <p className="text-xs text-muted-foreground text-center">
                     +{application.interviewNotes.length - 2} more interview notes
                   </p>
                 )}
